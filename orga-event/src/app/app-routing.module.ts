@@ -9,7 +9,7 @@ const routes: Routes = [
     component: CreerEvenementComponent
   },
   {
-    path:"listeEvenement",
+    path:"",
     component:ListeEvenementComponent
   }
 

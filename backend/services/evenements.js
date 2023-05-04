@@ -1,6 +1,7 @@
 module.exports = {
   evenement:[
     {
+      "id": 1 ,
       "acronyme" : "AL3C2019",
       "nom" : "Forum AL3C 2019",
       "lieu" : "31000",
@@ -10,6 +11,7 @@ module.exports = {
       "nbMaxParticipant" : 100
     },
     {
+      "id": 2 ,
       "acronyme" : "PSGOL",
       "nom" : "Match PSG vs OL",
       "lieu" : "75016",
@@ -19,8 +21,9 @@ module.exports = {
       "nbMaxParticipant" : 49000
     },
     {
+      "id": 3 ,
       "acronyme" : "GP F1 France",
-      "nom" : "Match PSG vs OL",
+      "nom" : "GPF1",
       "lieu" : "83330",
       "description" : "Rendez-vous 15h00 au circuit Paul Ricard",
       "dateOuverture" : "14/03/2020",

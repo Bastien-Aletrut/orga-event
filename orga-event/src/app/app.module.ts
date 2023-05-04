@@ -8,6 +8,10 @@ import { HeaderComponent } from './header/header.component';
 import { ConnexionComponent } from './connexion/connexion.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ListeEvenementComponent } from './liste-evenement/liste-evenement.component';
+import { MatTableModule } from '@angular/material/table';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DetailEvenementComponent } from './detail-evenement/detail-evenement.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -15,12 +19,16 @@ import { ListeEvenementComponent } from './liste-evenement/liste-evenement.compo
     CreerEvenementComponent,
     HeaderComponent,
     ConnexionComponent,
-    ListeEvenementComponent
+    ListeEvenementComponent,
+    DetailEvenementComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule, 
+    MatTableModule, 
+    BrowserAnimationsModule,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
