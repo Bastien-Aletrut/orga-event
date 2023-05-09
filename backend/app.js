@@ -1,7 +1,8 @@
 var express = require('express');
 var app = express();
-var data = require('./services/evenements.js')
-var cors = require('cors')
+var cors = require('cors');
+
+var route = require('./routes/routes.js')
 
 
 var corsOptions = {
@@ -9,8 +10,6 @@ var corsOptions = {
     optionsSuccessStatus: 200
 }
 
-app.get('/', cors(corsOptions), function(req, res) {
-  res.send(data);
-});
+app.use('/', express.json(), cors(corsOptions), route);
 
 app.listen(3000);

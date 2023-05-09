@@ -22,10 +22,17 @@ export class ListeEvenementComponent implements OnInit {
   }
 
   getEvenements() {
-    this.api.getEvenement().subscribe((result) => {
+    this.api.getEvenements().subscribe((result) => {
       this.evenements = result
-      console.log(this.evenements)
+      console.log(this.evenements);
     });
+  }
+
+  deleteEvenement(id:number){
+    this.api.deleteEvenement(id).subscribe((result)=>{
+      console.log(result);
+    });
+    this.getEvenements()
   }
 
   openDialog(nomP:string, acronymeP:string, lieuP:string, descriptionP:Text, dateOuvertureP:Date, dateClotureP:Date, nbMaxParticipantP:number): void {

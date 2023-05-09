@@ -1,0 +1,16 @@
+.content{
+    width: 80%;
+    margin: auto;
+    margin-top: 20px;
+}
+
+.flexbox{
+    margin: auto;
+    width: 60%;
+    display: flex;
+    justify-content: space-between;   
+}
+
+.box{
+    text-align: center;
+}

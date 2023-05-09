@@ -1,4 +1,78 @@
-<div>
-    <p >creer-evenement works!</p>
+<div class="content">
+    <h1 style="text-align: center;">Créer un événement</h1>
+    <form class="mat-elevation-z2" style="padding: 20px; border-radius: 5px;" [formGroup]="formEvent" (ngSubmit)="postEvenement()">
+        <div class="form-group">
+          <label style="margin-bottom: 3px;">Acronyme de l'événement</label>
+          <input type="text" class="form-control" formControlName="acronyme">
+        </div>
+        <br>
+        <div class="form-group">
+          <label style="margin-bottom: 3px;">Nom de l'événement</label>
+          <input type="text" class="form-control" formControlName="nom">
+        </div>
+        <br>
+        <div class="form-group">
+            <label style="margin-bottom: 3px;">Lieu de l'événement</label>
+            <input type="text" class="form-control" formControlName="lieu">
+        </div>
+        <br>
+        <div class="form-group">
+            <label style="margin-bottom: 3px;">Description de l'événement</label>
+            <input type="text" class="form-control" formControlName="description">
+        </div>
+        <br>
+        <br>
+        <div class="form-group flexbox" >
+
+            <div class="box">
+                <label style="margin-bottom: 3px;">Date d'ouverture de l'événement</label> 
+                <br>
+                <mat-form-field appearance="fill" class="example-form-field">
+                    <mat-label>JJ/MM/AAAA</mat-label>
+                    <input matInput [matDatepicker]="dp1" formControlName="dateOuverture">
+                    <mat-datepicker-toggle matIconSuffix [for]="dp1"></mat-datepicker-toggle>
+                    <mat-datepicker #dp1>
+                      <mat-datepicker-actions>
+                        <button mat-button matDatepickerCancel>Annuler</button>
+                        <button mat-raised-button color="primary" matDatepickerApply (click)="setFrench()">OK</button>
+                      </mat-datepicker-actions>
+                    </mat-datepicker>
+                  </mat-form-field>
+            </div>
+
+            <div class="box">
+                <label style="margin-bottom: 3px;">Date de clôture de l'événement</label> 
+                <br>
+                <mat-form-field appearance="fill" class="example-form-field">
+                    <mat-label>JJ/MM/AAAA</mat-label>
+                    <input matInput [matDatepicker]="dp2" formControlName="dateCloture">
+                    <mat-datepicker-toggle matIconSuffix [for]="dp2"></mat-datepicker-toggle>
+                    <mat-datepicker #dp2>
+                      <mat-datepicker-actions>
+                        <button mat-button matDatepickerCancel>Annuler</button>
+                        <button mat-raised-button color="primary" matDatepickerApply (click)="setFrench()">OK</button>
+                      </mat-datepicker-actions>
+                    </mat-datepicker>
+                  </mat-form-field>
+            </div>
+
+
+
+        </div> 
+        <br>
+
+        <div class="form-group">
+            <label style="margin-bottom: 3px;">Nombre maximum de participant</label>
+            <input type="number" class="form-control" formControlName="nbMaxParticipant">
+        </div>
+
+        <br>
+        <div style="text-align: center;">
+            <button type="submit" class="btn btn-primary">Créer l'événement</button>
+        </div>
+
+    </form>
+    <br>
+    <br>
 </div>
 
