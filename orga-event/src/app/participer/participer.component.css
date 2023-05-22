@@ -1,0 +1,17 @@
+h1 {
+    text-align: center;
+}
+
+form {
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.content {
+    margin: 30px;
+    text-align: center;
+}
+
+.input-error {
+    border: red 1px solid;
+}

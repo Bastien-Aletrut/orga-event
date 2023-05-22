@@ -1,4 +1,5 @@
-export interface Evenements {
+export interface Evenement {
+    id:number;
     acronyme: string;
     nom: string;
     lieu: string;

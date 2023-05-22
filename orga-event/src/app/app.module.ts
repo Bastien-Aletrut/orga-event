@@ -18,6 +18,13 @@ import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { ParticiperComponent } from './participer/participer.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { ListeParticipantsComponent } from './liste-participants/liste-participants.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+
 
 
 @NgModule({
@@ -27,7 +34,10 @@ import { MatButtonModule } from '@angular/material/button';
     HeaderComponent,
     ConnexionComponent,
     ListeEvenementComponent,
-    DetailEvenementComponent
+    DetailEvenementComponent,
+    ParticiperComponent,
+    DashboardComponent,
+    ListeParticipantsComponent
   ],
   imports: [
     BrowserModule,
@@ -41,9 +51,14 @@ import { MatButtonModule } from '@angular/material/button';
     MatNativeDateModule,
     MatInputModule,
     ReactiveFormsModule,
-    MatButtonModule
+    MatButtonModule,
+    MatPaginatorModule ,
+    MatSortModule,
+    DragDropModule
   ],
-  providers: [{provide: MAT_DATE_LOCALE, useValue: 'fr'},],
+  providers: [{provide: MAT_DATE_LOCALE, useValue: 'fr-FR'}],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }
+

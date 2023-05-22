@@ -1,16 +1,33 @@
-.content{
+.content {
     width: 80%;
     margin: auto;
     margin-top: 20px;
 }
 
-.flexbox{
+.flexbox {
     margin: auto;
     width: 60%;
     display: flex;
-    justify-content: space-between;   
+    justify-content: space-between;
 }
 
-.box{
+.box {
     text-align: center;
+}
+
+.textCenter {
+    text-align: center;
+}
+
+.input-error {
+    border: red 1px solid;
+}
+
+label {
+    margin-bottom: 3px;
+}
+
+form {
+    padding: 20px;
+    border-radius: 5px;
 }

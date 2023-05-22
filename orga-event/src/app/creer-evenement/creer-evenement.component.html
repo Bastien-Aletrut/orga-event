@@ -1,78 +1,83 @@
 <div class="content">
-    <h1 style="text-align: center;">Créer un événement</h1>
-    <form class="mat-elevation-z2" style="padding: 20px; border-radius: 5px;" [formGroup]="formEvent" (ngSubmit)="postEvenement()">
-        <div class="form-group">
-          <label style="margin-bottom: 3px;">Acronyme de l'événement</label>
-          <input type="text" class="form-control" formControlName="acronyme">
-        </div>
-        <br>
-        <div class="form-group">
-          <label style="margin-bottom: 3px;">Nom de l'événement</label>
-          <input type="text" class="form-control" formControlName="nom">
-        </div>
-        <br>
-        <div class="form-group">
-            <label style="margin-bottom: 3px;">Lieu de l'événement</label>
-            <input type="text" class="form-control" formControlName="lieu">
-        </div>
-        <br>
-        <div class="form-group">
-            <label style="margin-bottom: 3px;">Description de l'événement</label>
-            <input type="text" class="form-control" formControlName="description">
-        </div>
-        <br>
-        <br>
-        <div class="form-group flexbox" >
-
-            <div class="box">
-                <label style="margin-bottom: 3px;">Date d'ouverture de l'événement</label> 
-                <br>
-                <mat-form-field appearance="fill" class="example-form-field">
-                    <mat-label>JJ/MM/AAAA</mat-label>
-                    <input matInput [matDatepicker]="dp1" formControlName="dateOuverture">
-                    <mat-datepicker-toggle matIconSuffix [for]="dp1"></mat-datepicker-toggle>
-                    <mat-datepicker #dp1>
-                      <mat-datepicker-actions>
-                        <button mat-button matDatepickerCancel>Annuler</button>
-                        <button mat-raised-button color="primary" matDatepickerApply (click)="setFrench()">OK</button>
-                      </mat-datepicker-actions>
-                    </mat-datepicker>
-                  </mat-form-field>
-            </div>
-
-            <div class="box">
-                <label style="margin-bottom: 3px;">Date de clôture de l'événement</label> 
-                <br>
-                <mat-form-field appearance="fill" class="example-form-field">
-                    <mat-label>JJ/MM/AAAA</mat-label>
-                    <input matInput [matDatepicker]="dp2" formControlName="dateCloture">
-                    <mat-datepicker-toggle matIconSuffix [for]="dp2"></mat-datepicker-toggle>
-                    <mat-datepicker #dp2>
-                      <mat-datepicker-actions>
-                        <button mat-button matDatepickerCancel>Annuler</button>
-                        <button mat-raised-button color="primary" matDatepickerApply (click)="setFrench()">OK</button>
-                      </mat-datepicker-actions>
-                    </mat-datepicker>
-                  </mat-form-field>
-            </div>
-
-
-
-        </div> 
-        <br>
-
-        <div class="form-group">
-            <label style="margin-bottom: 3px;">Nombre maximum de participant</label>
-            <input type="number" class="form-control" formControlName="nbMaxParticipant">
-        </div>
-
-        <br>
-        <div style="text-align: center;">
-            <button type="submit" class="btn btn-primary">Créer l'événement</button>
-        </div>
-
-    </form>
+  <h1 class="textCenter">Créer un événement</h1>
+  <form class="mat-elevation-z2" [formGroup]="formEvent" (ngSubmit)="postEvenement()">
+    <div class="form-group">
+      <label>Acronyme de l'événement *</label>
+      <input type="text" class="form-control" formControlName="acronyme"
+        [ngClass]="{'input-error': formEvent.get('acronyme')?.invalid && formEvent.get('acronyme')?.touched}"
+        [pattern]="patternGlobal">
+    </div>
+    <br>
+    <div class="form-group">
+      <label>Nom de l'événement *</label>
+      <input type="text" class="form-control" formControlName="nom"
+        [ngClass]="{'input-error': formEvent.get('nom')?.invalid && formEvent.get('nom')?.touched}">
+    </div>
+    <br>
+    <div class="form-group">
+      <label>Lieu de l'événement *</label>
+      <input type="text" class="form-control" formControlName="lieu"
+        [ngClass]="{'input-error': formEvent.get('lieu')?.invalid && formEvent.get('lieu')?.touched}">
+    </div>
+    <br>
+    <div class="form-group">
+      <label>Description de l'événement *</label>
+      <textarea class="form-control" formControlName="description"
+        [ngClass]="{'input-error': formEvent.get('description')?.invalid && formEvent.get('description')?.touched}"></textarea>
+    </div>
     <br>
     <br>
+    <div class="form-group flexbox">
+
+      <div class="box">
+        <label>Date d'ouverture de l'événement *</label>
+        <br>
+        <mat-form-field appearance="fill" class="example-form-field">
+          <mat-label>JJ/MM/AAAA</mat-label>
+          <input matInput [matDatepicker]="dp1" formControlName="dateOuverture"
+            [ngClass]="{'input-error': formEvent.get('dateOuverture')?.invalid && formEvent.get('dateOuverture')?.touched}">
+          <mat-datepicker-toggle matIconSuffix [for]="dp1"></mat-datepicker-toggle>
+          <mat-datepicker #dp1>
+            <mat-datepicker-actions>
+              <button mat-button matDatepickerCancel>Annuler</button>
+              <button mat-raised-button color="primary" matDatepickerApply>OK</button>
+            </mat-datepicker-actions>
+          </mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <div class="box">
+        <label>Date de clôture de l'événement *</label>
+        <br>
+        <mat-form-field appearance="fill" class="example-form-field">
+          <mat-label>JJ/MM/AAAA</mat-label>
+          <input matInput [matDatepicker]="dp2" formControlName="dateCloture"
+            [ngClass]="{'input-error': formEvent.get('dateCloture')?.invalid && formEvent.get('dateCloture')?.touched}">
+          <mat-datepicker-toggle matIconSuffix [for]="dp2"></mat-datepicker-toggle>
+          <mat-datepicker #dp2>
+            <mat-datepicker-actions>
+              <button mat-button matDatepickerCancel>Annuler</button>
+              <button mat-raised-button color="primary" matDatepickerApply>OK</button>
+            </mat-datepicker-actions>
+          </mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
+    <br>
+
+    <div class="form-group">
+      <label>Nombre maximum de participant *</label>
+      <input type="number" class="form-control" formControlName="nbMaxParticipant"
+        [ngClass]="{'input-error': formEvent.get('nbMaxParticipant')?.invalid && formEvent.get('nbMaxParticipant')?.touched}"
+        [pattern]="patternNb">
+    </div>
+
+    <br>
+    <div class="textCenter">
+      <button [disabled]="formEvent.invalid" type="submit" class="btn btn-primary">Créer l'événement</button>
+    </div>
+
+  </form>
+  <br>
+  <br>
 </div>
-

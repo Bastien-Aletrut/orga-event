@@ -1,56 +1,102 @@
-
 <div class="content">
-    <h1>Liste des événements</h1>
-<table mat-table [dataSource]="evenements" class="mat-elevation-z8">
+    <div *ngIf="authService.isAdmin==true">
+        <h1>Liste totale des événements</h1>
+        <input placeholder="Filtre" class="form-control" (keyup)="filtreAll($event)">
+        <br>
+        <div class="mat-elevation-z8">
+            <table mat-table [dataSource]="allEventData" matSort>
 
-    <ng-container matColumnDef="acronyme">
-        <th mat-header-cell *matHeaderCellDef style="background-color: #1777ff; color: white;"> Acronyme </th>
-        <td mat-cell *matCellDef="let element"> {{element.acronyme}} </td>
-    </ng-container>
+                <ng-container matColumnDef="acronyme">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header
+                        style="background-color: #1777ff; color: white;"> Acronyme </th>
+                    <td mat-cell *matCellDef="let element"> {{element.acronyme}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="nom">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header
+                        style="background-color: #1777ff; color: white;"> Nom </th>
+                    <td mat-cell *matCellDef="let element"> {{element.nom}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="lieu">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header
+                        style="background-color: #1777ff; color: white;"> Lieu </th>
+                    <td mat-cell *matCellDef="let element"> {{element.lieu}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="participants">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header
+                        style="background-color: #1777ff; color: white;"> Nombre de participants </th>
+                    <td mat-cell *matCellDef="let element"> {{element.participants.length}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="action">
+                    <th mat-header-cell *matHeaderCellDef style="background-color: #1777ff; color: white;"> Action </th>
+                    <td mat-cell *matCellDef="let element">
+                        <button type="button" class="btn btn-outline-primary btn-sm buttonMg"
+                            (click)="openDialogDetail(element.id, element.nom, element.acronyme, element.lieu, element.description, element.dateOuverture, element.dateCloture, element.nbMaxParticipant)">Consulter</button>
+                        <button type="button" class="btn btn-danger btn-sm"
+                            (click)="deleteEvenement(element.id)">Supprimer</button>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="[5,3,10]"></mat-paginator>
+        </div>
+
+    </div>
+
+    <div *ngIf="authService.isAdmin==false">
+        <h1>Liste des événements en cours</h1>
+
+        <input placeholder="Filtre" class="form-control" (keyup)="filtreCurrent($event)">
+        <br>
+        <div class="mat-elevation-z8">
+            <table mat-table [dataSource]="currentEventData" matSort>
+
+                <ng-container matColumnDef="acronyme">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header
+                        style="background-color: #1777ff; color: white;"> Acronyme </th>
+                    <td mat-cell *matCellDef="let element"> {{element.acronyme}} </td>
+                </ng-container>
 
 
-    <ng-container matColumnDef="nom">
-        <th mat-header-cell *matHeaderCellDef style="background-color: #1777ff; color: white;"> Nom </th>
-        <td mat-cell *matCellDef="let element"> {{element.nom}} </td>
-    </ng-container>
+                <ng-container matColumnDef="nom">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header
+                        style="background-color: #1777ff; color: white;"> Nom </th>
+                    <td mat-cell *matCellDef="let element"> {{element.nom}} </td>
+                </ng-container>
 
 
-    <ng-container matColumnDef="lieu">
-        <th mat-header-cell *matHeaderCellDef style="background-color: #1777ff; color: white;"> Lieu </th>
-        <td mat-cell *matCellDef="let element"> {{element.lieu}} </td>
-    </ng-container>
+                <ng-container matColumnDef="lieu">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header
+                        style="background-color: #1777ff; color: white;"> Lieu </th>
+                    <td mat-cell *matCellDef="let element"> {{element.lieu}} </td>
+                </ng-container>
 
+                <ng-container matColumnDef="participants">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header
+                        style="background-color: #1777ff; color: white;"> Nombre de participants </th>
+                    <td mat-cell *matCellDef="let element">{{element.participants.length}}</td>
+                </ng-container>
 
-    <!-- <ng-container matColumnDef="description">
-        <th mat-header-cell *matHeaderCellDef style="background-color: #1777ff; color: white;"> Description </th>
-        <td mat-cell *matCellDef="let element"> {{element.description}} </td>
-    </ng-container>
+                <ng-container matColumnDef="action">
+                    <th mat-header-cell *matHeaderCellDef style="background-color: #1777ff; color: white;"> Action </th>
+                    <td mat-cell *matCellDef="let element">
+                        <button type="button" class="btn btn-outline-primary btn-sm buttonMg"
+                            (click)="openDialogDetail(element.id, element.nom, element.acronyme, element.lieu, element.description, element.dateOuverture, element.dateCloture, element.nbMaxParticipant)">Consulter</button>
+                        <button type="button" class="btn btn-primary btn-sm"
+                            (click)="openDialogParticiper(element.id)">Participer</button>
+                    </td>
+                </ng-container>
 
-    <ng-container matColumnDef="dateOuverture">
-        <th mat-header-cell *matHeaderCellDef style="background-color: #1777ff; color: white;"> Date d'ouverture </th>
-        <td mat-cell *matCellDef="let element"> {{element.dateOuverture}} </td>
-    </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="[3,1,10]"></mat-paginator>
+        </div>
+    </div>
 
-    <ng-container matColumnDef="dateCloture">
-        <th mat-header-cell *matHeaderCellDef style="background-color: #1777ff; color: white;"> Date de clôture </th>
-        <td mat-cell *matCellDef="let element"> {{element.dateCloture}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="nbMaxParticipant">
-        <th mat-header-cell *matHeaderCellDef style="background-color: #1777ff; color: white;"> Nombre de participant </th>
-        <td mat-cell *matCellDef="let element"> {{element.nbMaxParticipant}} </td>
-    </ng-container> -->
-
-    <ng-container matColumnDef="action">
-        <th mat-header-cell *matHeaderCellDef style="background-color: #1777ff; color: white;"> Action </th>
-        <td mat-cell *matCellDef="let element">
-            <button type="button" class="btn btn-outline-primary btn-sm" style="margin-right: 5px" (click)="openDialog(element.nom, element.acronyme, element.lieu, element.description, element.dateOuverture, element.dateCloture, element.nbMaxParticipant)">Consulter</button>
-            <button type="button" class="btn btn-primary btn-sm" style="margin-right: 5px">Modifier</button>
-            <button type="button" class="btn btn-danger btn-sm" (click)="deleteEvenement(element.id)">Supprimer</button>
-        </td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
 </div>

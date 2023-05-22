@@ -1,0 +1,25 @@
+/* a:hover{
+    color: white
+} */
+
+a:hover {
+    color: white;
+}
+
+a {
+    color: white;
+}
+
+.linkActive {
+    color: #1777ff;
+}
+
+button {
+    background-color: #1777ff;
+    color: white;
+}
+
+button:hover {
+    background-color: #1777ff;
+    color: white;
+}

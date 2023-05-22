@@ -1,7 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ApiService } from '../api.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DetailEvenementComponent } from '../detail-evenement/detail-evenement.component';
+import { AuthService } from '../authService';
+import { ParticiperComponent } from '../participer/participer.component';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-liste-evenement',
@@ -12,44 +17,89 @@ import { DetailEvenementComponent } from '../detail-evenement/detail-evenement.c
 export class ListeEvenementComponent implements OnInit {
 
   evenements!: any;
-  displayedColumns: string[] = ['acronyme', 'nom', 'lieu', 'action'];
+  currentEvenements!: any;
+  allEventData: any;
+  currentEventData: any;
 
-  constructor(private api: ApiService, public dialog: MatDialog) { }
+  @ViewChild(MatPaginator) paginator1 !: MatPaginator;
+  @ViewChild(MatPaginator) paginator2 !: MatPaginator;
 
+  @ViewChild(MatSort) sort !: MatSort;
+
+  displayedColumns: string[] = ['acronyme', 'nom', 'lieu', 'participants', 'action'];
+
+  constructor(private api: ApiService, public dialog: MatDialog, public authService: AuthService) { }
 
   ngOnInit(): void {
-    this.getEvenements()
+    this.getAllEvenements();
+    this.getCurrentEvenements();
   }
 
-  getEvenements() {
-    this.api.getEvenements().subscribe((result) => {
-      this.evenements = result
-      console.log(this.evenements);
+  getAllEvenements() {
+    this.api.getAllEvenements().subscribe((result) => {
+      this.evenements = result;
+      this.allEventData = new MatTableDataSource<any>(this.evenements);
+      this.allEventData.paginator = this.paginator1;
+      this.allEventData.sort = this.sort;
     });
   }
 
-  deleteEvenement(id:number){
-    this.api.deleteEvenement(id).subscribe((result)=>{
-      console.log(result);
-    });
-    this.getEvenements()
+  getCurrentEvenements() {
+    this.api.getCurrentEvenements().subscribe((result) => {
+      this.currentEvenements = result;
+      console.log(this.currentEvenements);
+      this.currentEventData = new MatTableDataSource<any>(this.currentEvenements);
+      this.currentEventData.paginator = this.paginator2;
+      this.currentEventData.sort = this.sort;
+    })
   }
 
-  openDialog(nomP:string, acronymeP:string, lieuP:string, descriptionP:Text, dateOuvertureP:Date, dateClotureP:Date, nbMaxParticipantP:number): void {
+  deleteEvenement(id: number) {
+    if (confirm("Voulez-vous vraiment supprimer cet événement ?")) {
+      this.api.deleteEvenement(id).subscribe((result) => {
+      });
+      setTimeout(() => {
+        this.getAllEvenements()
+      }, 500);
+
+    }
+  }
+
+  filtreAll(event: Event) {
+    const value = (event.target as HTMLInputElement).value;
+    this.allEventData.filter = value;
+  }
+
+  filtreCurrent(event: Event) {
+    const value = (event.target as HTMLInputElement).value;
+    this.currentEventData.filter = value;
+  }
+
+  openDialogDetail(pId: number, pNom: string, pAcronyme: string, pLieu: string, pDescription: Text, pDateOuverture: Date, pDateCloture: Date, pNbMaxParticipant: number): void {
     const dialogRef = this.dialog.open(DetailEvenementComponent, {
       width: '55%',
       height: '80%',
       data: {
-        nom: nomP,
-        acronyme: acronymeP,
-        lieu: lieuP,
-        description: descriptionP,
-        dateOuverture: dateOuvertureP,
-        dateCloture: dateClotureP,
-        nbMaxParticipant: nbMaxParticipantP,
+        id: pId,
+        nom: pNom,
+        acronyme: pAcronyme,
+        lieu: pLieu,
+        description: pDescription,
+        dateOuverture: pDateOuverture,
+        dateCloture: pDateCloture,
+        nbMaxParticipant: pNbMaxParticipant,
       }
     });
   }
 
+  openDialogParticiper(pId: number): void {
+    const dialogRef = this.dialog.open(ParticiperComponent, {
+      width: '55%',
+      height: '65%',
+      data: {
+        id: pId
+      }
+    });
+  }
 }
 

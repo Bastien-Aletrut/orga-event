@@ -1,0 +1,17 @@
+.content {
+    width: 80%;
+    margin: auto;
+    margin-top: 20px;
+}
+
+button {
+    margin-right: 5px;
+    background-color: #1777ff;
+    color: white;
+}
+
+button:hover {
+    margin-right: 5px;
+    background-color: #212529;
+    color: white;
+}

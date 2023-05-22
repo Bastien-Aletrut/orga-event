@@ -1,7 +1,10 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { ListeEvenementComponent } from '../liste-evenement/liste-evenement.component';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Evenements } from 'src/model/evenement';
+import { Evenement } from 'src/model/evenement';
+import { ApiService } from '../api.service';
+import { Router } from '@angular/router';
+import { AuthService } from '../authService';
 
 
 @Component({
@@ -9,14 +12,16 @@ import { Evenements } from 'src/model/evenement';
   templateUrl: './detail-evenement.component.html',
   styleUrls: ['./detail-evenement.component.css']
 })
-export class DetailEvenementComponent implements OnInit {
+export class DetailEvenementComponent {
 
   constructor(
     public dialogRef: MatDialogRef<ListeEvenementComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Evenements) { }
+    @Inject(MAT_DIALOG_DATA) public data: Evenement, private api: ApiService, private router: Router, public authService: AuthService) { }
 
-  ngOnInit(): void {
-    console.log(this.data.lieu);
+
+  listeParticipants() {
+    this.router.navigate(['/listeParticipants/' + this.data.id]);
+    this.dialogRef.close();
   }
 
 }

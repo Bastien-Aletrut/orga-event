@@ -1,16 +1,25 @@
 <nav class="navbar navbar-expand bg-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" routerLink="/" ><img src="../assets/icon.png" width="60px"></a>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/" style="color: white;">Accueil</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/creerEvenement" style="color: white">Créer un événement</a>
-          </li>
-        </ul>
-        <button type="button" class="btn btn-sm" style="background-color: #1777ff; color: white;">Se déconnecter</button>
-      </div>
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/"><img src="../assets/icon.png" width="60px"></a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/" routerLinkActive="linkActive"
+            [routerLinkActiveOptions]="{exact:true}">Accueil</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/creerEvenement" routerLinkActive="linkActive"
+            *ngIf="authService.isAdmin==true">Créer un événement</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/dashboard" routerLinkActive="linkActive"
+            *ngIf="authService.isAdmin==true">Tableau de bord</a>
+        </li>
+      </ul>
+      <button type="button" class="btn btn-sm" *ngIf="authService.isAdmin==false" routerLink="/seConnecter">Se
+        connecter</button>
+      <button type="button" class="btn btn-sm" *ngIf="authService.isAdmin==true" (click)="seDeconnecter()">Se
+        déconnecter</button>
     </div>
-  </nav>
+  </div>
+</nav>

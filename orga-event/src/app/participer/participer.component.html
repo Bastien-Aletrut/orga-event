@@ -1,0 +1,37 @@
+<div class="content">
+    <h1>Je m'incris !</h1>
+    <div class="alert alert-danger" role="alert" *ngIf="alert">
+        Il n'y a plus de place dans l'événement !!
+    </div>
+    <form [formGroup]="formParticipant" (ngSubmit)="postParticipant()">
+        <div class="input-group mb-3">
+            <span class="input-group-text">Nom :</span>
+            <input type="text" class="form-control" formControlName="nom"
+                [ngClass]="{'input-error': formParticipant.get('nom')?.invalid && formParticipant.get('nom')?.touched}"
+                [pattern]="patternNomPre">
+        </div>
+
+        <div class="input-group mb-3">
+            <span class="input-group-text">Prénom :</span>
+            <input type="text" class="form-control" formControlName="prenom"
+                [ngClass]="{'input-error': formParticipant.get('prenom')?.invalid && formParticipant.get('prenom')?.touched}"
+                [pattern]="patternNomPre">
+        </div>
+
+        <div class="input-group mb-3">
+            <span class="input-group-text">@mail :</span>
+            <input type="email" class="form-control" formControlName="mail"
+                [ngClass]="{'input-error': formParticipant.get('mail')?.invalid && formParticipant.get('mail')?.touched}"
+                [pattern]="patternMail">
+        </div>
+
+        <div class="input-group mb-3">
+            <span class="input-group-text">Numéro de téléphone :</span>
+            <input type="text" class="form-control" formControlName="numTel"
+                [ngClass]="{'input-error': formParticipant.get('numTel')?.invalid && formParticipant.get('numTel')?.touched}"
+                [pattern]="patternNum">
+        </div>
+
+        <button [disabled]="formParticipant.invalid" type="submit" class="btn btn-primary">Valider</button>
+    </form>
+</div>

@@ -1,24 +1,26 @@
 <div class="content">
-    <h1 style="text-align: center;">Détails de l'événement</h1>
-    <h2 style="display: inline; color: #1777ff;">Nom de l'événement : </h2> 
-    <p style="display: inline; font-size: 16px;">{{data.nom}}</p>
+    <h1>Détails de l'événement</h1>
+    <h2 class="inline">Nom de l'événement : </h2>
+    <p>{{data.nom}}</p>
     <br><br>
-    <h2 style="display: inline; color: #1777ff;">Acronyme de l'événement : </h2>
-    <p style="display: inline; font-size: 16px;">{{data.acronyme}}</p>
+    <h2 class="inline">Acronyme de l'événement : </h2>
+    <p>{{data.acronyme}}</p>
     <br><br>
-    <h2 style="display: inline; color: #1777ff;">Lieu de l'événement : </h2>
-    <p style="display: inline; font-size: 16px;">{{data.lieu}}</p>
+    <h2 class="inline">Lieu de l'événement : </h2>
+    <p>{{data.lieu}}</p>
     <br><br>
-    <h2 style="color: #1777ff;">Description de l'événement : </h2>
-    <p style="display: inline; margin-left: 20px; font-size: 16px;">{{data.description}}</p>
+    <h2>Description de l'événement : </h2>
+    <p class="desc">{{data.description}}</p>
     <br><br>
-    <h2 style="display: inline; color: #1777ff;">Date d'ouverture de l'événement : </h2>
-    <p style="display: inline; font-size: 16px;">{{data.dateOuverture}}</p>
+    <h2 class="inline">Date d'ouverture de l'événement : </h2>
+    <p>{{data.dateOuverture | date: 'dd/MM/YYYY'}}</p>
     <br><br>
-    <h2 style="display: inline; color: #1777ff;">Date de clôture de l'événement : </h2>
-    <p style="display: inline; font-size: 16px;">{{data.dateCloture}}</p>
+    <h2 class="inline">Date de clôture de l'événement : </h2>
+    <p>{{data.dateCloture | date: 'dd/MM/YYYY'}}</p>
     <br><br>
-    <h2 style="display: inline; color: #1777ff;">Nombre maximum de participant de l'événement : </h2>
-    <p style="display: inline; font-size: 16px;">{{data.nbMaxParticipant}}</p>
+    <h2 class="inline">Nombre maximum de participant de l'événement : </h2>
+    <p>{{data.nbMaxParticipant}}</p>
+    <br><br>
+    <button *ngIf="authService.isAdmin==true" type="button" class="btn btn-primary btn-sm"
+        (click)="listeParticipants()">Consulter la liste des participants</button>
 </div>
-

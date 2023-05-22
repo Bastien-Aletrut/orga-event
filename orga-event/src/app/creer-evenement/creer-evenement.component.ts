@@ -1,19 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DateAdapter } from '@angular/material/core';
 import { ApiService } from '../api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-creer-evenement',
   templateUrl: './creer-evenement.component.html',
   styleUrls: ['./creer-evenement.component.css']
 })
-export class CreerEvenementComponent implements OnInit{
+export class CreerEvenementComponent implements OnInit {
 
   formEvent!: FormGroup;
-  allData!:any;
+  allData!: any;
 
-  constructor(private fb: FormBuilder, private dateAdapter: DateAdapter<any>, private api: ApiService){}
+  patternGlobal = "^[a-zA-Z- 0-9]+$";
+  patternNb = "[0-9]+";
+
+  constructor(private fb: FormBuilder, private dateAdapter: DateAdapter<any>, private api: ApiService, private router: Router) { }
 
   ngOnInit(): void {
     this.formEvent = this.fb.group({
@@ -27,20 +31,11 @@ export class CreerEvenementComponent implements OnInit{
     })
   }
 
-  postEvenement(){
+  postEvenement() {
     this.allData = this.formEvent.value;
     this.api.postEvenement(this.allData).subscribe((result) => {
-      console.log(result)
     })
-    console.log(this.formEvent.value);
+    this.router.navigate(["/"])
   }
-
-  setFrench(){
-    this.dateAdapter.setLocale('fr');
-  }
-
-  // onSubmit(){
-  //   console.log(this.formEvent.value);
-  // }
 
 }
