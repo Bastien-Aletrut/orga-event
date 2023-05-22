@@ -88,6 +88,7 @@ service.getCurrentEvenements = (req, res) => {
       currentEvenement.push(evenements[i]);
     }
   }
+
   res.send(currentEvenement);
 }
 
@@ -119,14 +120,13 @@ service.postEvenement = (req, res) => {
     "nom": req.body.nom,
     "lieu": req.body.lieu,
     "description": req.body.description,
-    "dateOuverture": dateOuverture.toString(),
-    "dateCloture": dateCloture.toString(),
+    "dateOuverture": dateOuverture,
+    "dateCloture": dateCloture,
     "nbMaxParticipant": req.body.nbMaxParticipant,
     "participants": []
   }
 
   evenements.push(newEvenement);
-
   res.send(evenements);
 }
 

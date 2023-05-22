@@ -22,9 +22,10 @@ export class ListeEvenementComponent implements OnInit {
   currentEventData: any;
 
   @ViewChild(MatPaginator) paginator1 !: MatPaginator;
-  @ViewChild(MatPaginator) paginator2 !: MatPaginator;
+  // @ViewChild(MatPaginator) paginator2 !: MatPaginator;
 
-  @ViewChild(MatSort) sort !: MatSort;
+  @ViewChild(MatSort) sort1 !: MatSort;
+  @ViewChild(MatSort) sort2 !: MatSort;
 
   displayedColumns: string[] = ['acronyme', 'nom', 'lieu', 'participants', 'action'];
 
@@ -40,17 +41,15 @@ export class ListeEvenementComponent implements OnInit {
       this.evenements = result;
       this.allEventData = new MatTableDataSource<any>(this.evenements);
       this.allEventData.paginator = this.paginator1;
-      this.allEventData.sort = this.sort;
+      this.allEventData.sort = this.sort1;
     });
   }
 
   getCurrentEvenements() {
     this.api.getCurrentEvenements().subscribe((result) => {
       this.currentEvenements = result;
-      console.log(this.currentEvenements);
       this.currentEventData = new MatTableDataSource<any>(this.currentEvenements);
-      this.currentEventData.paginator = this.paginator2;
-      this.currentEventData.sort = this.sort;
+      this.currentEventData.sort = this.sort2;
     })
   }
 

@@ -43,14 +43,13 @@
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             </table>
-            <mat-paginator [pageSizeOptions]="[5,3,10]"></mat-paginator>
+            <mat-paginator [pageSizeOptions]="[5,2,10]"></mat-paginator>
         </div>
 
     </div>
 
     <div *ngIf="authService.isAdmin==false">
         <h1>Liste des événements en cours</h1>
-
         <input placeholder="Filtre" class="form-control" (keyup)="filtreCurrent($event)">
         <br>
         <div class="mat-elevation-z8">
@@ -95,7 +94,6 @@
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             </table>
-            <mat-paginator [pageSizeOptions]="[3,1,10]"></mat-paginator>
         </div>
     </div>
 
