@@ -22,12 +22,13 @@ export class ListeEvenementComponent implements OnInit {
   currentEventData: any;
 
   @ViewChild(MatPaginator) paginator1 !: MatPaginator;
-  // @ViewChild(MatPaginator) paginator2 !: MatPaginator;
 
   @ViewChild(MatSort) sort1 !: MatSort;
   @ViewChild(MatSort) sort2 !: MatSort;
 
   displayedColumns: string[] = ['acronyme', 'nom', 'lieu', 'participants', 'action'];
+  displayedColumns2: string[] = ['acronyme', 'nom', 'lieu', 'action'];
+
 
   constructor(private api: ApiService, public dialog: MatDialog, public authService: AuthService) { }
 
